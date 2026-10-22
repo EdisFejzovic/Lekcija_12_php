@@ -5,13 +5,11 @@ session_start();
 
 require_once "config.php";
 
-// Provjera da li je korisnik prijavljen
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
 
-// Preuzimanje svih korisnika iz baze
 $sql = "SELECT * FROM new_users";
 
 $stmt = $conn->prepare($sql);
@@ -25,12 +23,10 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Dashboard</title>
 
-    <!-- Bootstrap CSS -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -66,7 +62,6 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
 
-    <!-- NAVBAR -->
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
 
@@ -75,8 +70,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?= htmlspecialchars($_SESSION['username']) ?>
             </span>
 
-            <a href="logout.php"
-               class="btn btn-outline-light">
+            <a href="logout.php" class="btn btn-outline-light">
                 Sign out
             </a>
 
@@ -86,7 +80,6 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="container-fluid">
         <div class="row">
 
-            <!-- SIDEBAR -->
             <div class="col-md-2 sidebar">
 
                 <h5 class="mt-4 ms-3">Menu</h5>
@@ -99,9 +92,12 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     Edit Profile
                 </a>
 
+                <a href="productDashboard.php">
+                    Products Dashboard
+                </a>
+
             </div>
 
-            <!-- MAIN CONTENT -->
             <div class="col-md-10 main-content">
 
                 <h2>Dashboard</h2>
@@ -172,7 +168,6 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                                 </form>
                             </td>
-
                         </tr>
 
                         <?php endforeach; ?>
